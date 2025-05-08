@@ -1,6 +1,4 @@
 /.venv
 
-backend/scripts/*
-frontend/node_modules/*
 
 
