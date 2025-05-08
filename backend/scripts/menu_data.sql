@@ -1,0 +1,11 @@
+INSERT INTO t_menu (id, name, level, path) VALUES (0, '全部', 0, '/');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (2, '用户管理', 1, 0, '/user_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (3, '权限管理', 1, 0, '/author_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (4, '商品管理', 1, 0, '/product_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (5, '订单管理', 1, 0, '/order_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (6, '数据统计', 1, 0, '/data_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (21, '用户列表', 2, 2, '/user_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (31, '角色列表', 2, 3, '/author_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (32, '权限列表', 2, 3, '/role_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (41, '商品列表', 2, 4, '/product_list');
+INSERT INTO t_menu (id, name, level, pid, path) VALUES (42, '分类列表', 2, 4, '/group_list');
