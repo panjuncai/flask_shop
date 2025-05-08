@@ -6,21 +6,22 @@ import re
 
 
 class UserService:
-    def create_user(self, username, password, email=None, phone=None):
+    def create_user(self, username, password, email=None, phone=None, rid=None):
         """
         创建新用户
         """
         try:
             # 检查用户名是否已存在
-            if User.query.filter_by(username=username).first():
+            if User.query.filter_by(name=username).first():
                 raise ValueError("用户名已存在")
 
             # 创建新用户
             user = User(
                 name=username,
-                pwd=generate_password_hash(password),
+                pwd=password,  # __init__中会自动进行密码加密
                 email=email,
-                phone=phone
+                phone=phone,
+                rid=rid
             )
             
             # 保存到数据库
@@ -51,14 +52,14 @@ class UserService:
                 raise ValueError("用户不存在")
 
             # 如果要更改用户名，检查新用户名是否已存在
-            if username and username != user.username:
-                if User.query.filter_by(username=username).first():
+            if username and username != user.name:
+                if User.query.filter_by(name=username).first():
                     raise ValueError("新用户名已存在")
-                user.username = username
+                user.name = username
 
             # 更新其他字段
             if password:
-                user.password = generate_password_hash(password)
+                user.pwd = generate_password_hash(password)
             if email:
                 self._validate_email(email)
                 user.email = email
@@ -91,11 +92,11 @@ class UserService:
         """
         用户登录
         """
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(name=username).first()
         if not user:
             raise ValueError("用户名或密码错误")
 
-        if not check_password_hash(user.password, password):
+        if not check_password_hash(user.pwd, password):
             raise ValueError("用户名或密码错误")
 
         # 生成认证令牌
@@ -126,7 +127,7 @@ class UserService:
         """
         return {
             'id': user.id,
-            'username': user.username,
+            'username': user.name,  # 转换为前端期望的字段名
             'email': user.email,
             'phone': user.phone,
             'created_at': user.created_at.strftime('%Y-%m-%d %H:%M:%S') if user.created_at else None,

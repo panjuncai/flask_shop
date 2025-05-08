@@ -7,7 +7,7 @@ class Role(db.Model):
     name = db.Column(db.String(32), unique=True, nullable=False)
     desc = db.Column(db.String(64))
 
-    users = db.relationship('User', backref='role')
+    users = db.relationship('User', back_populates='role')
     menus = db.relationship('Menu', secondary=trm)
 
     def to_dict(self):

@@ -23,7 +23,7 @@ class User(db.Model, BaseModel):
     
     # 外键关系
     rid = db.Column(db.Integer, db.ForeignKey('t_role.id'), comment='角色ID')
-    role = db.relationship('Role', backref=db.backref('users', lazy='dynamic'))
+    role = db.relationship('Role', back_populates='users')
 
     def __init__(self, name, pwd, nick_name=None, phone=None, email=None, rid=None):
         self.name = name

@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# 忽略所有的__pycache__文件夹
+__pycache__/
+*/__pycache__/
+
